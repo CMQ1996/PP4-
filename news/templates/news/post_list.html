@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewsHub | Latest News</title>
+</head>
+<body>
+    <header>
+        <h1>NewsHub</h1>
+        <p>Discover and discuss the latest stories.</p>
+    </header>
+
+    <main>
+        <h2>Latest Posts</h2>
+
+        {% for post in posts %}
+            <article>
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.content }}</p>
+                <p>
+                    Posted by {{ post.author.username }}
+                    on {{ post.created_at|date:"d M Y" }}
+                </p>
+                <hr>
+            </article>
+        {% empty %}
+            <p>No news posts yet. Check back soon!</p>
+        {% endfor %}
+    </main>
+
+    <footer>
+        <p>&copy; 2026 NewsHub</p>
+    </footer>
+</body>
+</html>
