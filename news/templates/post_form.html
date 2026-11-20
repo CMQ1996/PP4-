@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Post | NewsHub</title>
+</head>
+<body>
+    <header>
+        <h1>NewsHub</h1>
+        <a href="{% url 'post_list' %}">Back to Homepage</a>
+    </header>
+
+    <main>
+        <h2>Create a News Post</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit">Publish Post</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 NewsHub</p>
+    </footer>
+</body>
+</html>
