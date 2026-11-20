@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'news',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 ]
 
 
@@ -49,6 +52,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -130,8 +134,30 @@ MAILERS = {
 # Heroku HTTPS security settings
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = 'DYNO' in os.environ
 
 SESSION_COOKIE_SECURE = True
 
 CSRF_COOKIE_SECURE = True
+
+
+# Django Allauth settings
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+ACCOUNT_LOGIN_METHODS = {'username'}
+
+ACCOUNT_SIGNUP_FIELDS = [
+    'username*',
+    'email',
+    'password1*',
+    'password2*',
+]
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
