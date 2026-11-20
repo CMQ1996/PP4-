@@ -10,6 +10,21 @@
     <header>
         <h1>NewsHub</h1>
         <p>Discover and discuss the latest stories.</p>
+
+        <nav>
+            {% if user.is_authenticated %}
+                <p>Welcome, {{ user.username }}!</p>
+
+                <form method="post" action="{% url 'account_logout' %}">
+                    {% csrf_token %}
+                    <button type="submit">Log Out</button>
+                </form>
+            {% else %}
+                <a href="{% url 'account_login' %}">Log In</a>
+                |
+                <a href="{% url 'account_signup' %}">Sign Up</a>
+            {% endif %}
+        </nav>
     </header>
 
     <main>
