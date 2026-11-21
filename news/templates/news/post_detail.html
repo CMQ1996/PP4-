@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,20 +7,34 @@
     <title>{{ post.title }} | NewsHub</title>
 </head>
 <body>
+
     <header>
         <h1>NewsHub</h1>
-        <a href="{% url 'post_list' %}">Back to all posts</a>
+        <a href="{% url 'post_list' %}">Back to Homepage</a>
     </header>
 
     <main>
         <article>
             <h2>{{ post.title }}</h2>
+
             <p>{{ post.content }}</p>
+
             <p>
                 Posted by {{ post.author.username }}
                 on {{ post.created_at|date:"d M Y" }}
             </p>
+
+            {% if user.is_authenticated and user == post.author %}
+                <a href="{% url 'post_edit' post.pk %}">
+                    Edit Post
+                </a>
+            {% endif %}
         </article>
     </main>
+
+    <footer>
+        <p>&copy; 2026 NewsHub</p>
+    </footer>
+
 </body>
 </html>
