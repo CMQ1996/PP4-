@@ -36,6 +36,47 @@
                 </a>
             {% endif %}
         </article>
+
+        <hr>
+
+        <section>
+            <h2>Comments</h2>
+
+            {% for comment in comments %}
+                <article>
+                    <p>
+                        <strong>{{ comment.author.username }}</strong>
+                        on {{ comment.created_at|date:"d M Y" }}
+                    </p>
+
+                    <p>{{ comment.body }}</p>
+                </article>
+
+                <hr>
+            {% empty %}
+                <p>No comments yet. Be the first to comment!</p>
+            {% endfor %}
+        </section>
+
+        <section>
+            <h2>Leave a Comment</h2>
+
+            {% if user.is_authenticated %}
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ comment_form.as_p }}
+
+                    <button type="submit">
+                        Submit Comment
+                    </button>
+                </form>
+            {% else %}
+                <p>
+                    Please <a href="{% url 'account_login' %}">log in</a>
+                    to leave a comment.
+                </p>
+            {% endif %}
+        </section>
     </main>
 
     <footer>
