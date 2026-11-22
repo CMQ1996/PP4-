@@ -95,3 +95,46 @@ def post_delete(request, pk):
         'news/post_confirm_delete.html',
         {'post': post}
     )
+
+
+@login_required
+def comment_edit(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+
+    if comment.author != request.user:
+        return HttpResponseForbidden(
+            "You do not have permission to edit this comment."
+        )
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST, instance=comment)
+
+        if form.is_valid():
+            form.save()
+            return redirect('post_detail', pk=comment.post.pk)
+    else:
+        form = CommentForm(instance=comment)
+
+    return render(request, 'news/comment_form.html', {
+        'form': form,
+        'comment': comment,
+    })
+
+
+@login_required
+def comment_delete(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+
+    if comment.author != request.user:
+        return HttpResponseForbidden(
+            "You do not have permission to delete this comment."
+        )
+
+    if request.method == 'POST':
+        post_pk = comment.post.pk
+        comment.delete()
+        return redirect('post_detail', pk=post_pk)
+
+    return render(request, 'news/comment_confirm_delete.html', {
+        'comment': comment,
+    })
