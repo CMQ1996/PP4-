@@ -1,0 +1,49 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block head_title %}Account{% endblock %} | NewsHub
+    </title>
+
+    <link rel="stylesheet" href="{% static 'news/css/style.css' %}">
+
+    {% block extra_head %}
+    {% endblock %}
+</head>
+<body>
+
+    <header>
+        <h1>NewsHub</h1>
+        <a href="{% url 'post_list' %}">Back to Homepage</a>
+    </header>
+
+    <main>
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <article>
+            {% block body %}
+                {% block content %}
+                {% endblock %}
+            {% endblock %}
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 NewsHub</p>
+    </footer>
+
+    {% block extra_body %}
+    {% endblock %}
+
+</body>
+</html>

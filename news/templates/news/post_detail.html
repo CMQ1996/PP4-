@@ -1,10 +1,13 @@
 ﻿
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ post.title }} | NewsHub</title>
+    <link rel="stylesheet" href="{% static 'news/css/style.css' %}">
 </head>
 <body>
 
@@ -28,16 +31,12 @@
                 <a href="{% url 'post_edit' post.pk %}">
                     Edit Post
                 </a>
-
                 |
-
                 <a href="{% url 'post_delete' post.pk %}">
                     Delete Post
                 </a>
             {% endif %}
         </article>
-
-        <hr>
 
         <section>
             <h2>Comments</h2>
@@ -55,16 +54,12 @@
                         <a href="{% url 'comment_edit' comment.pk %}">
                             Edit Comment
                         </a>
-
                         |
-
                         <a href="{% url 'comment_delete' comment.pk %}">
                             Delete Comment
                         </a>
                     {% endif %}
                 </article>
-
-                <hr>
             {% empty %}
                 <p>No comments yet. Be the first to comment!</p>
             {% endfor %}
@@ -97,3 +92,4 @@
 
 </body>
 </html>
+S

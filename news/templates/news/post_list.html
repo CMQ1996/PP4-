@@ -1,12 +1,16 @@
 
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NewsHub | Latest News</title>
+    <link rel="stylesheet" href="{% static 'news/css/style.css' %}">
 </head>
 <body>
+
     <header>
         <h1>NewsHub</h1>
         <p>Discover and discuss the latest stories.</p>
@@ -46,8 +50,6 @@
                     Posted by {{ post.author.username }}
                     on {{ post.created_at|date:"d M Y" }}
                 </p>
-
-                <hr>
             </article>
         {% empty %}
             <p>No news posts yet. Check back soon!</p>
@@ -57,5 +59,6 @@
     <footer>
         <p>&copy; 2026 NewsHub</p>
     </footer>
+
 </body>
 </html>

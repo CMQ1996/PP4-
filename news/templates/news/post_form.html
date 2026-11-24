@@ -1,31 +1,49 @@
 
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Post | NewsHub</title>
+    <title>Post Form | NewsHub</title>
+    <link rel="stylesheet" href="{% static 'news/css/style.css' %}">
 </head>
 <body>
+
     <header>
         <h1>NewsHub</h1>
         <a href="{% url 'post_list' %}">Back to Homepage</a>
     </header>
 
     <main>
-        <h2>Create a News Post</h2>
+        <article>
+            {% if form.instance.pk %}
+                <h2>Edit Post</h2>
+            {% else %}
+                <h2>Create a News Post</h2>
+            {% endif %}
 
-        <form method="POST">
-            {% csrf_token %}
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
 
-            {{ form.as_p }}
+                {% if form.instance.pk %}
+                    <button type="submit">Save Changes</button>
+                {% else %}
+                    <button type="submit">Publish Post</button>
+                {% endif %}
+            </form>
 
-            <button type="submit">Publish Post</button>
-        </form>
+            <p>
+                <a href="{% url 'post_list' %}">Cancel</a>
+            </p>
+        </article>
     </main>
 
     <footer>
         <p>&copy; 2026 NewsHub</p>
     </footer>
+
 </body>
 </html>
