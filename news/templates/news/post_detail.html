@@ -1,5 +1,4 @@
-﻿
-{% load static %}
+﻿{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,9 +42,10 @@
 
             {% for comment in comments %}
                 <article>
+                    <h3>{{ comment.author.username }}</h3>
+
                     <p>
-                        <strong>{{ comment.author.username }}</strong>
-                        on {{ comment.created_at|date:"d M Y" }}
+                        {{ comment.created_at|date:"d M Y" }}
                     </p>
 
                     <p>{{ comment.body }}</p>
@@ -92,4 +92,3 @@
 
 </body>
 </html>
-S
