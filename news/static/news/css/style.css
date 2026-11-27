@@ -96,3 +96,15 @@ footer {
         padding: 15px;
     }
 }
+
+.site-title {
+    margin: 0;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+    .site-title {
+        font-size: 28px;
+    }
+}
